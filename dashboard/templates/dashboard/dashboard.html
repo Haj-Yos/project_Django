@@ -1,0 +1,14 @@
+<h2>Dashboard</h2>
+    <textarea id="dashboard_log" cols="60" rows="10"></textarea><br />
+    <script>
+        const dashboardSocket = new WebSocket(
+            "ws://" + window.location.host + "/ws/sensor/temperature"
+        );
+        dashboardSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            document.querySelector("#dashboard_log").value += data.message + "\n";
+        };
+        dashboardSocket.onclose = function (e) {
+            console.error(" Dashboard socket closed unexpectedly");
+        };
+    </script>

@@ -1,0 +1,42 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Django
+db.sqlite3
+db.sqlite3-journal
+*.log
+staticfiles/
+media/
+local_settings.py
+
+# Secrets and environment variables
+.env
+.env.*
+*.pem
+
+
+
+# Mosquitto: passwords and TLS keys/certs
+mosquitto_config/passwd
+mosquitto_config/*.key
+mosquitto_config/*.crt
+mosquitto_config/*.srl
+mosquitto_config/*.csr
+mosquitto_data/
+
+# Redis dump
+dump.rdb
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
