@@ -1,11 +1,16 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
-class DashboardConsumer (AsyncWebsocketConsumer):
+
+class DashboardConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        print('connect....')
-        await self.accept()
-        await self.send(text_data=json.dumps({"message": 'connected...'}))
-    async def receive(self,mqtt_messsage):
-        pass
-    async def disconnect(self,close_code):
-        pass        
+        self.room_group_name = 'sensor_temperature'
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+        await self.accept()                           # without this, the client is refused
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+    async def sensor_temperature(self, event):        # same event as in part 1
+        data = json.loads(event["message"]["payload"])
+        await self.send(text_data=json.dumps({
+            "valeur": data.get("valeur", data.get("value")),
+            "date_prise": data.get("date_prise"),
+        }))       

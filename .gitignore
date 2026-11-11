@@ -22,6 +22,7 @@ local_settings.py
 .env.*
 *.pem
 
+certificat_firebase.json
 
 
 # Mosquitto: passwords and TLS keys/certs

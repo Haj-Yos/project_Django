@@ -24,7 +24,6 @@ from mqtt_topics.consumers import GrandeurMqttConsumer
 application = ProtocolTypeRouter({
     'http': get_asgi_application(),
     'mqtt': GrandeurMqttConsumer.as_asgi(),
-    'websocket': AllowedHostsOriginValidator(
-        AuthMiddlewareStack(URLRouter(websocket_urlpatterns))
-    ),
+    "websocket": URLRouter(websocket_urlpatterns),
+    
 })

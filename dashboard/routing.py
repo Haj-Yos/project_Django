@@ -1,7 +1,6 @@
 from django.urls import re_path
-
-from . import consumers
+from mqtt_topics.consumers import SensorWebSocketConsumer
 
 websocket_urlpatterns = [
-    re_path(r"ws/sensor/temperature", consumers.DashboardConsumer.as_asgi()),
+    re_path(r"^ws/sensor/temperature$", SensorWebSocketConsumer.as_asgi()),
 ]
